@@ -85,14 +85,18 @@ def availableSlots(jwt, partyID, maxDays):
         headers=headers,
     )
 
-    today = datetime.strptime(datetime.now(pytz.timezone('Australia/Brisbane')).strftime('%Y-%m-%d'), '%Y-%m-%d')
-    availableDates =  [date["Date"].split("T")[0] for date in json.loads(response.text) if (date["Available"] != 0 and (datetime.strptime(date["Date"], '%Y-%m-%dT%H:%M:%S') - today).days <= maxDays)]
+    today = datetime.strptime(datetime.now(pytz.timezone(
+        'Australia/Brisbane')).strftime('%Y-%m-%d'), '%Y-%m-%d')
+    availableDates = [date["Date"].split("T")[0] for date in json.loads(response.text) if (
+        date["Available"] != 0 and (datetime.strptime(date["Date"], '%Y-%m-%dT%H:%M:%S') - today).days <= maxDays)]
 
-    logging.info(f'Avaiable slots for {locationLookup[partyID]} ({partyID}) within the next {maxDays} days is {availableDates}')
+    logging.info(
+        f'Avaiable slots for {locationLookup[partyID]} ({partyID}) within the next {maxDays} days is {availableDates}')
 
     return availableDates
 
+
 if __name__ == "__main__":
-    while(True):
+    while (True):
         availableSlots(getJWT(), 72492, 100)
         time.sleep(20)

@@ -95,7 +95,7 @@ async def availableSlots(jwt, partyID, location, maxDays):
     availableDates = []
     async with aiohttp.ClientSession() as session:
         async with session.get(f'https://api.dealersolutions.com.au/QIS/Locations/{partyID}/BookingSlotsCountByDate', params=params,
-                                headers=headers) as response:
+                               headers=headers) as response:
             jsonData = await response.text()
 
             availableDates = [date["Date"].split("T")[0] for date in json.loads(jsonData) if (

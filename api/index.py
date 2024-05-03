@@ -24,7 +24,7 @@ async def availables():
     # jwt = getJWT()
     tasks = [availableSlots(jwt, partyIDlookup[location],
                             location, maxDays) for location in locations]
-    
+
     results = await asyncio.gather(*tasks)
     print(results)
     return jsonify(results)
