@@ -1,8 +1,7 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
 
-# Flask + Vercel
+# Wovi Booking Monitor
 
-This example shows how to use Flask 3 on Vercel with Serverless Functions using the [Python Runtime](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python).
+The Wovi Booking Monitor is a Python-based web scraping tool designed to provide users with real-time updates on available slots for bookings on the Wovi platform. Leveraging the power of web scraping, this tool offers users the convenience of monitoring booking availability within a specified timeframe, eliminating the need for manual checking and ensuring timely booking opportunities.
 
 ## Demo
 
@@ -12,7 +11,20 @@ https://flask-python-template.vercel.app/
 
 This example uses the Web Server Gateway Interface (WSGI) with Flask to enable handling requests on Vercel with Serverless Functions.
 
-## Running Locally
+## Running Locally using Gunicorn 
+
+```bash
+poetry install 
+poetry run gunicorn -b localhost:3000 api.index:app
+```
+
+## Export dependencies to a requirements.txt file
+
+```
+poetry export --without-hashes --format=requirements.txt > requirements.txt
+```
+
+## Running Locally to test Vercel Deployment
 
 ```bash
 npm i -g vercel
@@ -20,9 +32,3 @@ vercel dev
 ```
 
 Your Flask application is now available at `http://localhost:3000`.
-
-## One-Click Deploy
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
