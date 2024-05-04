@@ -10,7 +10,7 @@ https://wovi.vercel.app
 
 This example uses the Web Server Gateway Interface (WSGI) with Flask to enable handling requests on Vercel with Serverless Functions.
 
-## Running Locally using Gunicorn
+## Running Locally using Poetry & Gunicorn
 
 ```bash
 poetry install
@@ -49,9 +49,9 @@ Your Flask application is now available at `http://localhost:3000`.
     ├── requirements.txt
     └── vercel.json
 
-## Run async_wovi.py directly to output to terminal
+## Running async_wovi.py Directly to Output to Terminal
 
-Before running the python script configure refresh time and location within async_wovi.py 
+Before running the Python script, configure the refresh time, location, and maximum number of days within the main block of async_wovi.py:
 
 ```python
 # Main block of code that will be executed when the script is run directly
@@ -76,7 +76,7 @@ if __name__ == "__main__":
         time.sleep(REFRESH_TIME)
 ```
 
-Now run the commands below to install the dependencies and run the python script
+To run the script and output the results to the terminal, use the following commands:
 
 ```bash
 pip install -r requirements.txt
