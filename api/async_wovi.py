@@ -31,7 +31,7 @@ async def getJWT():
                 # Extract JWT token from HTML response
                 jwt = html.split("INIT.TOKEN='")[1].split("'")[0]
                 logging.info("JWT successfully found")
-                logging.info(f"JWT : {jwt}")
+                # logging.info(f"JWT : {jwt}")
             except:
                 logging.info("JWT couldn't be found")
 
@@ -110,8 +110,24 @@ async def availableSlots(jwt, partyID, location, maxDays):
 
     return {"availableSlots": availableDates, "timeFetched": datetime.now(pytz.timezone('Australia/Brisbane')).strftime('%Y-%m-%d %H:%M:%S'),  "location": location}
 
+# Main block of code that will be executed when the script is run directly
 if __name__ == "__main__":
+    # Constant defining the time interval for refreshing data (in seconds)
+    REFRESH_TIME = 60
+    # Maximum number of days to look ahead for available slots
+    MAX_DAYS = 100
+    # Location for which slots will be checked
+    LOCATION = 'Brisbane'
+
+    # Infinite loop to continuously fetch available slots
     while (True):
+        # Asynchronously fetches a JSON Web Token (jwt) for authentication
         jwt = asyncio.run(getJWT())
-        results = asyncio.run(availableSlots(jwt, 72492, 'Brisbane', 100))
-        time.sleep(20)
+
+        # Asynchronously fetches available slots using the obtained jwt, party ID for the specified location,
+        # location name, and maximum number of days to look ahead
+        results = asyncio.run(availableSlots(jwt, partyIDlookup[LOCATION], LOCATION, MAX_DAYS))
+
+        # Pauses the execution for the specified refresh time before fetching slots again
+        time.sleep(REFRESH_TIME)
+
