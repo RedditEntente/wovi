@@ -236,6 +236,7 @@
                         })
                         .then((data) => {
                             generateTable(data);
+                            alertAvailableSlots(data);
                             console.log("Response:", data); // Handle the response data
                         })
                         .catch((error) => {
@@ -244,6 +245,26 @@
                                 error
                             );
                         });
+                }
+
+                function alertAvailableSlots(tableData) {
+                    var alertText = "";
+                    for (var j = 0; j < tableData.length; j++) {
+                        if (tableData[j]["availableSlots"].length != 0) {
+                            alertText =
+                                alertText +
+                                `${
+                                    tableData[j]["location"]
+                                }: Slot available on ${tableData[j][
+                                    "availableSlots"
+                                ].join(", ")} (Fetched at ${
+                                    tableData[j]["timeFetched"]
+                                })\n\n`;
+                        }
+                    }
+                    if (alertText != "") {
+                        alert(alertText.trim());
+                    }
                 }
 
                 function generateTable(tableData) {
