@@ -249,6 +249,10 @@
 
                 function alertAvailableSlots(tableData) {
                     var alertText = "";
+                    var mp3_url =
+                        "https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3";
+                    var alertAudio = new Audio(mp3_url);
+
                     for (var j = 0; j < tableData.length; j++) {
                         if (tableData[j]["availableSlots"].length != 0) {
                             alertText =
@@ -263,7 +267,10 @@
                         }
                     }
                     if (alertText != "") {
-                        alert(alertText.trim());
+                        alertAudio.play();
+                        setTimeout(function () {
+                            alert(alertText.trim());
+                        }, 1000);
                     }
                 }
 
