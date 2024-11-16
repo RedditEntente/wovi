@@ -102,7 +102,7 @@ async def availableSlots(jwt, partyID, location, maxDays):
 
             # Extract available dates from JSON response within the specified range
             availableDates = [date["Date"].split("T")[0] for date in json.loads(jsonData) if (
-                date["Available"] != 0 and (datetime.strptime(date["Date"], '%Y-%m-%dT%H:%M:%S') - today).days <= maxDays)]
+                date["Available"] != 0 and 3 < (datetime.strptime(date["Date"], '%Y-%m-%dT%H:%M:%S') - today).days <= maxDays)]
 
     # Log available slots for the location within the next maxDays days
     logging.info(
