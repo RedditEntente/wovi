@@ -128,6 +128,6 @@ if __name__ == "__main__":
         # location name, and maximum number of days to look ahead
         results = asyncio.run(availableSlots(jwt, partyIDlookup[LOCATION], LOCATION, MAX_DAYS))
 
-        # Pauses the execution for the specified refresh time before fetching slots again
+        # Pauses the execution for the specified refresh time before fetching slots 
         time.sleep(REFRESH_TIME)
 
