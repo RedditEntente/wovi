@@ -102,11 +102,11 @@ async def availableSlots(jwt, partyID, location, maxDays):
 
             # Extract available dates from JSON response within the specified range
             availableDates = [date["Date"].split("T")[0] for date in json.loads(jsonData) if (
-                date["Available"] != 0 and (datetime.strptime(date["Date"], '%Y-%m-%dT%H:%M:%S') - today).days <= maxDays)]
-
+                date["Available"] != 0 and (2 < (datetime.strptime(date["Date"], '%Y-%m-%dT%H:%M:%S') - today).days <= maxDays))]
+            
     # Log available slots for the location within the next maxDays days
     logging.info(
-        f'Avaiable slots for {locationLookup[partyID]} ({partyID}) within the next {maxDays} days is {availableDates}')
+        f'Avaiable slots for {locationLookup[partyID]} ({partyID}) within the next {maxDays} days is {availableDates} ')
 
     return {"availableSlots": availableDates, "timeFetched": datetime.now(pytz.timezone('Australia/Brisbane')).strftime('%Y-%m-%d %H:%M:%S'),  "location": location}
 
@@ -128,6 +128,6 @@ if __name__ == "__main__":
         # location name, and maximum number of days to look ahead
         results = asyncio.run(availableSlots(jwt, partyIDlookup[LOCATION], LOCATION, MAX_DAYS))
 
-        # Pauses the execution for the specified refresh time before fetching slots again
+        # Pauses the execution for the specified refresh time before fetching slots 
         time.sleep(REFRESH_TIME)
 
